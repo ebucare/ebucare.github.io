@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EbuCare Ambulance Jamshedpur | 24x7 Emergency</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-blue: #004494;
+            --secondary-blue: #0056b3;
+            --accent-red: #e63946;
+            --success-green: #25d366;
+            --bg-light: #f8f9fa;
+            --text-dark: #333333;
+            --text-light: #ffffff;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background-color: var(--bg-light); color: var(--text-dark); line-height: 1.6; }
+        a { text-decoration: none; }
+
+        /* --- 1 & 5. Sticky White Navigation Bar --- */
+        .top-nav {
+            background-color: var(--text-light); /* Changed to white */
+            padding: 12px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky; /* Keeps it at the top */
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08); /* Adds depth when scrolling */
+        }
+
+        .brand-logo {
+            max-height: 45px;
+            width: auto;
+        }
+
+        /* --- 6. Faster Pulsing Button --- */
+        .nav-call-btn {
+            background-color: var(--accent-red); color: var(--text-light); padding: 10px 22px;
+            border-radius: 50px; font-weight: 600; display: flex; align-items: center; gap: 8px;
+            animation: pulse-red 1.5s infinite; /* Increased pulse rate */
+            font-size: 15px;
+        }
+
+        @keyframes pulse-red {
+            0% { box-shadow: 0 0 0 0 rgba(230, 57, 70, 0.7); }
+            70% { box-shadow: 0 0 0 12px rgba(230, 57, 70, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(230, 57, 70, 0); }
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+            color: var(--text-light); text-align: center; padding: 40px 20px 80px;
+        }
+
+        /* --- 3. High Visibility Dispatcher Tag --- */
+        .live-status {
+            display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 700;
+            color: var(--primary-blue); background: var(--text-light); padding: 6px 18px;
+            border-radius: 50px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); margin-bottom: 25px;
+        }
+
+        .pulse-dot {
+            width: 10px; height: 10px; background-color: var(--success-green);
+            border-radius: 50%; animation: pulse-green 1.5s infinite;
+        }
+
+        @keyframes pulse-green {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+
+        .hero h1 { font-size: 36px; margin-bottom: 10px; letter-spacing: 0.5px; }
+        .hero h2 { font-size: 20px; font-weight: 400; margin-bottom: 35px; color: #d1e7dd; }
+
+        /* --- 2. Upgraded Desktop Step-by-Step UI --- */
+        .how-it-works {
+            display: flex; justify-content: center; align-items: center; gap: 15px;
+        }
+		.step-label {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px; /* Spreads the letters out cleanly */
+            color: rgba(255, 255, 255, 0.9); /* Soft, semi-transparent white */
+            margin-bottom: 12px;
+            font-weight: 800;
+        }
+
+        .step-pill {
+            background: var(--text-light); /* Solid White Background */
+            color: var(--primary-blue);    /* Brand Blue Text */
+            padding: 12px 24px;            /* Slightly larger for a premium feel */
+            border-radius: 50px;
+            font-size: 15px;
+            font-weight: 700;              /* Bolder text to stand out */
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* Deep shadow to pop off the blue hero */
+            border: none;                  /* Removed the transparent border */
+        }
+
+        /* Optional: Makes the little circle numbers inside the pills pop in red */
+        .step-pill i {
+            color: var(--accent-red);
+            font-size: 18px;
+        }
+
+        .step-arrow { 
+            color: var(--text-light); /* Solid white arrows */
+            font-size: 20px; 
+            font-weight: 900;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2)); /* Helps the arrow pop */
+        }
+
+        /* --- Service Cards Section --- */
+        .services-container {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px;
+            padding: 0 5%; margin-top: -40px; max-width: 1200px; margin-left: auto; margin-right: auto;
+            position: relative; z-index: 10;
+        }
+
+        .service-card {
+            background: var(--text-light); border-radius: 12px; padding: 35px 20px; text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08); border-top: 4px solid var(--accent-red);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0, 86, 179, 0.15);
+        }
+
+        .service-icon { font-size: 45px; color: var(--secondary-blue); margin-bottom: 15px; }
+        .service-card h3 { color: var(--primary-blue); margin-bottom: 10px; font-size: 20px; }
+        .service-card p { color: #555; font-size: 15px; line-height: 1.6; margin-bottom: 25px; min-height: 65px; }
+
+        .card-btn {
+            display: inline-block; border: 2px solid var(--secondary-blue); color: var(--secondary-blue);
+            padding: 8px 25px; border-radius: 50px; font-weight: 600; transition: all 0.3s ease;
+        }
+
+        .service-card:hover .card-btn { background: var(--secondary-blue); color: var(--text-light); }
+
+        /* --- 4. Trust Badges Section (Grid Alignment) --- */
+        .trust-section { text-align: center; padding: 60px 20px; max-width: 1100px; margin: 0 auto; }
+        .trust-section h3 { font-size: 26px; margin-bottom: 40px; color: var(--primary-blue); }
+        
+        .trust-badges { 
+            display: grid; 
+            grid-template-columns: repeat(4, 1fr); /* 4 columns on desktop */
+            gap: 20px; 
+        }
+        
+        .badge { 
+            display: flex; flex-direction: column; align-items: center; gap: 12px; 
+            font-size: 16px; font-weight: 600; color: #444; 
+        }
+        .badge i { font-size: 32px; color: var(--primary-blue); }
+
+        /* --- Bottom CTA Section --- */
+        .bottom-cta { background-color: var(--primary-blue); color: var(--text-light); text-align: center; padding: 50px 20px; }
+        .bottom-cta h2 { margin-bottom: 30px; font-size: 28px; }
+        .cta-buttons { display: flex; justify-content: center; flex-wrap: wrap; gap: 15px; }
+        
+        .btn-large {
+            padding: 15px 30px; border-radius: 50px; font-size: 18px; font-weight: 700;
+            display: flex; align-items: center; gap: 10px; color: var(--text-light); min-width: 280px; justify-content: center;
+        }
+        .btn-red { background-color: var(--accent-red); } /* 7. Pulse removed */
+        .btn-green { background-color: var(--success-green); }
+
+        /* Floating WhatsApp Icon (Desktop Only) */
+        .floating-wa {
+            position: fixed; bottom: 20px; right: 20px; background-color: var(--success-green); color: white;
+            width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center;
+            font-size: 35px; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4); z-index: 1000; transition: transform 0.3s;
+        }
+        .floating-wa:hover { transform: scale(1.1); }
+
+        .mobile-sticky-footer { display: none; }
+
+        /* --- Tablet & Mobile Responsiveness --- */
+        @media (max-width: 992px) {
+            /* 4. perfectly aligns badges into a 2x2 grid on tablets/mobile */
+            .trust-badges { grid-template-columns: repeat(2, 1fr); row-gap: 35px; }
+        }
+
+        @media (max-width: 768px) {
+            body { padding-bottom: 70px; }
+            .top-nav { padding: 12px 15px; }
+            .brand-logo { max-height: 38px; }
+            
+            /* Compact header button for mobile to save space */
+            .nav-call-btn { padding: 8px 15px; font-size: 14px; }
+            
+            .hero h1 { font-size: 26px; }
+            .hero h2 { font-size: 16px; margin-bottom: 25px; }
+            
+            /* Stack the step-by-step UI for mobile */
+            .how-it-works { flex-direction: column; gap: 8px; }
+            .step-pill { width: 90%; justify-content: center; padding: 12px 20px; }
+            .step-arrow { transform: rotate(90deg); margin: 2px 0; }
+
+            .services-container { margin-top: -15px; }
+            .btn-large { width: 100%; }
+            .floating-wa { display: none; }
+
+            /* Mobile Sticky Footer */
+            .mobile-sticky-footer {
+                display: flex; position: fixed; bottom: 0; left: 0; width: 100%;
+                z-index: 9999; box-shadow: 0 -4px 15px rgba(0,0,0,0.15);
+            }
+
+            .sticky-action {
+                flex: 1; display: flex; justify-content: center; align-items: center; gap: 8px;
+                padding: 16px 0; color: white; font-size: 16px; font-weight: 700; text-transform: uppercase;
+            }
+
+            .sticky-call { background-color: var(--accent-red); } /* 7. Pulse removed */
+            .sticky-wa { background-color: var(--success-green); }
+            
+            .badge { font-size: 14px; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="top-nav">
+        <a href="/" class="logo">
+            <img src="logo.png" alt="EbuCare Ambulance" class="brand-logo">
+        </a>
+        <a href="tel:09204843725" class="nav-call-btn">
+            <i class="fa-solid fa-phone-volume"></i> CALL NOW
+        </a>
+    </header>
+
+    <section class="hero">
+        <div class="live-status">
+            <div class="pulse-dot"></div>
+            Dispatchers Online Now
+        </div>
+
+        <h1>FASTEST 24x7 EMERGENCY AMBULANCE BOOKING</h1>
+        <h2>Jamshedpur | Mango | Immediate Dispatch</h2>
+        <div class="step-label">HOW TO BOOK:</div>
+        <div class="how-it-works">
+            <div class="step-pill"><i class="fa-regular fa-circle-1"></i> Call / WhatsApp</div>
+            <i class="fa-solid fa-chevron-right step-arrow"></i>
+            <div class="step-pill"><i class="fa-regular fa-circle-2"></i> Share Location</div>
+            <i class="fa-solid fa-chevron-right step-arrow"></i>
+            <div class="step-pill"><i class="fa-regular fa-circle-3"></i> Ambulance En Route</div>
+        </div>
+    </section>
+
+    <section class="services-container">
+        <div class="service-card">
+            <i class="fa-solid fa-heart-pulse service-icon"></i>
+            <h3>CRITICAL CARE (ICU)</h3>
+            <p>Fully-equipped with Advanced Life Support & critical care equipment. Specialized medical team.</p>
+            <a href="tel:09204843725" class="card-btn">Check Availability</a>
+        </div>
+
+        <div class="service-card">
+            <i class="fa-solid fa-suitcase-medical service-icon"></i>
+            <h3>ADVANCED LIFE SUPPORT (ALS)</h3>
+            <p>Equipped for serious medical emergencies with highly trained paramedics on board.</p>
+            <a href="tel:09204843725" class="card-btn">Book Now</a>
+        </div>
+
+        <div class="service-card">
+            <i class="fa-solid fa-bed-pulse service-icon"></i>
+            <h3>BASIC LIFE SUPPORT (BLS)</h3>
+            <p>Standard life support for safe, non-critical patient transport and hospital transfers.</p>
+            <a href="tel:09204843725" class="card-btn">Call for Transport</a>
+        </div>
+    </section>
+
+    <section class="trust-section">
+        <h3>The EbuCare Promise</h3>
+        <div class="trust-badges">
+            <div class="badge"><i class="fa-solid fa-clock"></i> <span>24x7 Guaranteed<br>Response</span></div>
+            <div class="badge"><i class="fa-solid fa-stopwatch"></i> <span>Under 15 Minute<br>Arrival Time</span></div>
+            <div class="badge"><i class="fa-solid fa-user-doctor"></i> <span>Certified Medical<br>Staff on Board</span></div>
+            <div class="badge"><i class="fa-solid fa-shield-heart"></i> <span>Advanced Medical<br>Equipment</span></div>
+        </div>
+    </section>
+
+    <section class="bottom-cta">
+        <h2>DON'T WAIT. EVERY SECOND COUNTS. <br>Book Your Ambulance in Under 60 Seconds</h2>
+        <div class="cta-buttons">
+            <a href="tel:09204843725" class="btn-large btn-red">
+                <i class="fa-solid fa-phone"></i> CALL NOW: 092048 43725
+            </a>
+            <a href="https://wa.me/919204843725?text=I%20need%20an%20emergency%20ambulance.%20Please%20help." target="_blank" class="btn-large btn-green">
+                <i class="fa-brands fa-whatsapp"></i> WhatsApp Location
+            </a>
+        </div>
+    </section>
+
+    <a href="https://wa.me/919204843725?text=I%20need%20an%20emergency%20ambulance.%20Please%20help." target="_blank" class="floating-wa">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <div class="mobile-sticky-footer">
+        <a href="tel:09204843725" class="sticky-action sticky-call">
+            <i class="fa-solid fa-phone"></i> Call Now
+        </a>
+        <a href="https://wa.me/919204843725?text=I%20need%20an%20emergency%20ambulance.%20Please%20help." target="_blank" class="sticky-action sticky-wa">
+            <i class="fa-brands fa-whatsapp"></i> WhatsApp
+        </a>
+    </div>
+
+</body>
+</html>
