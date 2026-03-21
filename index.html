@@ -194,27 +194,39 @@
             .trust-badges { grid-template-columns: repeat(2, 1fr); row-gap: 35px; }
         }
 
+/* --- Tablet & Mobile Responsiveness --- */
+        @media (max-width: 992px) {
+            .trust-badges { grid-template-columns: repeat(2, 1fr); row-gap: 35px; }
+        }
+
         @media (max-width: 768px) {
             body { padding-bottom: 70px; }
-            .top-nav { padding: 12px 15px; }
-            .brand-logo { max-height: 38px; }
             
-            /* Compact header button for mobile to save space */
-            .nav-call-btn { padding: 8px 15px; font-size: 14px; }
+            /* 1. Clean Header: Center logo, hide the redundant top button */
+            .top-nav { padding: 12px 15px; justify-content: center; }
+            .brand-logo { max-height: 42px; }
+            .nav-call-btn { display: none; } /* This makes the squished button disappear on mobile */
             
             .hero h1 { font-size: 26px; }
             .hero h2 { font-size: 16px; margin-bottom: 25px; }
             
-            /* Stack the step-by-step UI for mobile */
             .how-it-works { flex-direction: column; gap: 8px; }
             .step-pill { width: 90%; justify-content: center; padding: 12px 20px; }
             .step-arrow { transform: rotate(90deg); margin: 2px 0; }
 
             .services-container { margin-top: -15px; }
-            .btn-large { width: 100%; }
+            
+            /* 2. Fix the Body Buttons: Prevent text from breaking into two lines */
+            .btn-large { 
+                width: 100%; 
+                font-size: 15px; 
+                padding: 12px 10px;
+                white-space: nowrap; 
+            }
+            
             .floating-wa { display: none; }
 
-            /* Mobile Sticky Footer */
+            /* 3. Keep the Sticky Footer as the primary action */
             .mobile-sticky-footer {
                 display: flex; position: fixed; bottom: 0; left: 0; width: 100%;
                 z-index: 9999; box-shadow: 0 -4px 15px rgba(0,0,0,0.15);
@@ -225,7 +237,7 @@
                 padding: 16px 0; color: white; font-size: 16px; font-weight: 700; text-transform: uppercase;
             }
 
-            .sticky-call { background-color: var(--accent-red); } /* 7. Pulse removed */
+            .sticky-call { background-color: var(--accent-red); } 
             .sticky-wa { background-color: var(--success-green); }
             
             .badge { font-size: 14px; text-align: center; }
