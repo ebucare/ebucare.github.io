@@ -251,6 +251,15 @@
             
             .badge { font-size: 14px; text-align: center; }
         }
+		  .down-arrow {
+		    display: inline-block;
+		    animation: bounce 1.5s infinite;
+		  }
+		
+		  @keyframes bounce {
+		    0%, 100% { transform: translateY(0); }
+		    50% { transform: translateY(4px); }
+		  }
     </style>
 </head>
 <body>
@@ -271,9 +280,9 @@
         </div>
 
         <h1>FASTEST 24x7 EMERGENCY AMBULANCE BOOKING</h1>
-		<h2 style="text-align:center;">
-		  Jamshedpur 👉<br>
-		  Pardih | Tamuliya | Dimna | Mango 👉<br>
+		<h2 style="line-height: 1.6;">
+		  Jamshedpur <span class="down-arrow">👇</span><br>
+		  Pardih | Tamuliya | Dimna | Mango <span class="down-arrow">👇</span><br>
 		  Immediate Dispatch
 		</h2>        
 		<div class="step-label">HOW TO BOOK:</div>
