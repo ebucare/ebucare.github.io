@@ -176,8 +176,15 @@
         .badge i { font-size: 32px; color: var(--primary-blue); }
 
         /* --- Bottom CTA Section --- */
-        .bottom-cta { background-color: var(--primary-blue); color: var(--text-light); text-align: center; padding: 50px 20px; }
-        .bottom-cta h2 { margin-bottom: 30px; font-size: 28px; }
+			.bottom-cta { 
+				background-color: var(--primary-blue); 
+				color: var(--text-light); 
+				text-align: center; 
+				padding: 50px 20px; 
+				min-height: 40vh; /* Ensures this section is tall enough to fill the screen */
+				margin-bottom: 0; /* Ensures no margin is pushing the footer away */
+			}        
+		.bottom-cta h2 { margin-bottom: 30px; font-size: 28px; }
         .cta-buttons { display: flex; justify-content: center; flex-wrap: wrap; gap: 15px; }
         
         .btn-large {
@@ -209,8 +216,10 @@
         }
 
         @media (max-width: 768px) {
-            body { padding-bottom: 70px; }
-            
+            body { 
+			padding-bottom: 0; /* Changed from 70px to 0 to remove the gap */
+			background-color: var(--primary-blue); /* Sets background to blue to hide any potential slivers */
+			}            
             /* 1. Clean Header: Center logo, hide the redundant top button */
             .top-nav { padding: 12px 15px; justify-content: center; }
             .brand-logo { max-height: 42px; }
@@ -237,9 +246,16 @@
 
             /* 3. Keep the Sticky Footer as the primary action */
             .mobile-sticky-footer {
-                display: flex; position: fixed; bottom: 0; left: 0; width: 100%;
-                z-index: 9999; box-shadow: 0 -4px 15px rgba(0,0,0,0.15);
-            }
+				display: flex; 
+				position: fixed; 
+				bottom: 0; 
+				left: 0; 
+				width: 100%;
+				z-index: 9999; 
+				box-shadow: 0 -4px 15px rgba(0,0,0,0.15);
+				/* This next line handles safe-area gaps on mobile browsers */
+				padding-bottom: env(safe-area-inset-bottom); 
+			}
 
             .sticky-action {
                 flex: 1; display: flex; justify-content: center; align-items: center; gap: 8px;
