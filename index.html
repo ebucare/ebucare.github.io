@@ -152,32 +152,42 @@
         }
 
         @media (max-width: 768px) {
-            body { padding-bottom: 70px; } /* Creates room for fixed footer */
-            .top-nav { justify-content: center; }
-            .nav-call-btn { display: none; }
-            .hero h1 { font-size: 26px; }
-            .how-it-works { flex-direction: column; gap: 8px; }
-            .step-pill { width: 90%; justify-content: center; }
-            .step-arrow { transform: rotate(90deg); margin: 2px 0; }
+			/* 1. Force the body to be a column that fills the screen */
+			body { 
+				display: flex;
+				flex-direction: column;
+				min-height: 100vh;
+				margin: 0;
+				padding-bottom: 70px; /* Room for the red/green footer */
+				background-color: var(--primary-blue); /* Matches the bottom section */
+			}
 
-            /* Hiding hero CTA buttons on mobile to avoid overlap/clutter with footer */
-            .cta-buttons { display: none; }
-            .bottom-cta h2 { font-size: 22px; }
+			/* 2. Make the blue CTA section fill all remaining space */
+			.bottom-cta { 
+				flex-grow: 1; /* This "stretches" the blue to hit the footer */
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				background-color: var(--primary-blue); 
+				padding: 40px 20px;
+			}
 
-            .floating-wa { display: none; }
+			/* 3. Keep the rest of your mobile fixes */
+			.top-nav { justify-content: center; }
+			.nav-call-btn, .cta-buttons, .floating-wa { display: none; }
+			.hero h1 { font-size: 26px; }
+			.how-it-works { flex-direction: column; gap: 8px; }
+			.step-pill { width: 90%; justify-content: center; }
+			.step-arrow { transform: rotate(90deg); margin: 2px 0; }
 
-            .mobile-sticky-footer {
-                display: flex; position: fixed; bottom: 0; left: 0; width: 100%;
-                z-index: 9999; box-shadow: 0 -4px 15px rgba(0,0,0,0.15);
-                padding-bottom: env(safe-area-inset-bottom);
-            }
-            .sticky-action {
-                flex: 1; display: flex; justify-content: center; align-items: center; gap: 8px;
-                padding: 18px 0; color: white; font-size: 16px; font-weight: 700; text-transform: uppercase;
-            }
-            .sticky-call { background-color: var(--accent-red); } 
-            .sticky-wa { background-color: var(--success-green); }
-        }
+			.mobile-sticky-footer {
+				display: flex; position: fixed; bottom: 0; left: 0; width: 100%;
+				z-index: 9999; padding-bottom: env(safe-area-inset-bottom);
+			}
+			.sticky-action { flex: 1; display: flex; justify-content: center; padding: 18px 0; font-weight: 700; }
+			.sticky-call { background-color: var(--accent-red); } 
+			.sticky-wa { background-color: var(--success-green); }
+		}
     </style>
 </head>
 <body>
