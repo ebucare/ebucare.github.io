@@ -177,9 +177,39 @@
 
         /* --- Bottom CTA Section --- */
         .bottom-cta { background-color: var(--primary-blue); color: var(--text-light); text-align: center; padding: 50px 20px; }
-        .bottom-cta h2 { margin-bottom: 30px; font-size: 28px; }
-        .cta-buttons { display: flex; justify-content: center; flex-wrap: wrap; gap: 15px; }
-        
+        <!-- .bottom-cta h2 { margin-bottom: 30px; font-size: 28px; } -->
+		
+		.bottom-cta h2 {
+			margin-bottom: 12px;   /* reduced from 30px */
+			font-size: 28px;
+			line-height: 1.15;     /* controls overall spacing */
+		}
+
+		.cta-main {
+			display: block;
+			font-size: 28px;
+			font-weight: 800;
+			line-height: 1.1;
+			letter-spacing: 0.5px;
+		}
+
+		.cta-sub {
+			display: block;
+			font-size: 24px;
+			font-weight: 400;
+			opacity: 0.85;
+			margin-top: 2px;
+			margin-bottom: 12px;  /* 👈 add this */
+			line-height: 1.1;
+		}
+        <!-- .cta-buttons { display: flex; justify-content: center; flex-wrap: wrap; gap: 15px; } -->
+		.cta-buttons { 
+			display: flex; 
+			justify-content: center; 
+			flex-wrap: wrap; 
+			gap: 15px;
+			margin-top: 22px;  /* 👈 THIS solves your problem */
+		}
         .btn-large {
             padding: 15px 30px; border-radius: 50px; font-size: 18px; font-weight: 700;
             display: flex; align-items: center; gap: 10px; color: var(--text-light); min-width: 280px; justify-content: center;
@@ -260,6 +290,9 @@
 		    0%, 100% { transform: translateY(0); }
 		    50% { transform: translateY(4px); }
 		  }
+		  .highlight-yellow {
+		    color: #FFC107; /* modern yellow */
+}
     </style>
 </head>
 <body>
@@ -343,7 +376,12 @@
     </section>
 
     <section class="bottom-cta">
-        <h2>DON'T WAIT. EVERY SECOND COUNTS. <br>Book Your Ambulance in Under 60 Seconds</h2>
+		<!-- <h2>DON'T WAIT. EVERY SECOND COUNTS. <br>Book Your Ambulance in Under 60 Seconds</h2> -->
+		<h2>
+		  <span class="cta-main">DON'T WAIT. EVERY SECOND COUNTS.</span>
+		  <br>
+		  <span class="cta-sub highlight-yellow">Book Your Ambulance in Under <strong>60 Seconds</strong></span>
+		</h2>
         <div class="cta-buttons">
             <a href="tel:09204843725" class="btn-large btn-red">
                 <i class="fa-solid fa-phone"></i> CALL NOW: 092048 43725
