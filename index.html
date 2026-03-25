@@ -417,42 +417,78 @@
 			        <i class="fa-brands fa-whatsapp"></i> WhatsApp
 			</a>
 	</div> 
-	    <div id="installBanner" style="display:none; position:fixed; bottom:20px; left:50%; transform:translateX(-50%); width:90%; background:#ffffff; border:2px solid #ed1c24; border-radius:12px; padding:15px; box-shadow:0 4px 15px rgba(0,0,0,0.2); z-index:9999; text-align:center;">
-	        <p style="margin:0 0 10px 0; font-weight:bold; color:#003366;">Install EbuCare for 24/7 Faster Access</p>
-	        <button id="installBtn" style="background:#ed1c24; color:white; border:none; padding:10px 20px; border-radius:6px; font-weight:bold; cursor:pointer;">INSTALL NOW</button>
-	        <button id="closeBanner" style="background:none; border:none; color:#666; margin-left:10px; font-size:12px; cursor:pointer;">Not now</button>
+	    <div id="ebuToast" style="display:none; position:fixed; top:20px; left:50%; transform:translateX(-50%); width:85%; max-width:400px; background:#004494; color:white; padding:16px; border-radius:12px; box-shadow:0 4px 20px rgba(0,0,0,0.3); z-index:10000; text-align:center; font-weight:600; animation: slideDown 0.5s ease;">
+        “EbuCare saved. You’re now one tap away from help 🚑”
+    </div>
+
+	    <div id="installBanner" style="display:none; position:fixed; bottom:20px; left:50%; transform:translateX(-50%); width:90%; max-width:450px; background:#ffffff; border:2px solid #ed1c24; border-radius:16px; padding:20px; box-shadow:0 8px 30px rgba(0,0,0,0.2); z-index:9999; text-align:center;">
+	        <h3 style="margin:0 0 5px 0; color:#ed1c24; font-size:20px;">🚑 Save for Emergency Use</h3>
+	        <p style="margin:0 0 20px 0; color:#003366; font-weight:600;">EbuCare – Fast Ambulance Access</p>
+	        
+	        <div style="display:flex; gap:10px; justify-content:center; margin-bottom:15px;">
+	            <button id="installBtn" style="flex:1; background:#ed1c24; color:white; border:none; padding:12px; border-radius:8px; font-weight:bold; cursor:pointer; font-size:16px;">Save Now</button>
+	            <button id="closeBanner" style="flex:1; background:#f0f0f0; color:#666; border:none; padding:12px; border-radius:8px; font-weight:bold; cursor:pointer; font-size:16px;">Later</button>
+	        </div>
+	        
+	        <p style="margin:0; font-size:12px; color:#888;">No app download required • Works instantly on your phone</p>
 	    </div>
+	
+	    <style>
+	        @keyframes slideDown {
+	            from { top: -100px; opacity: 0; }
+	            to { top: 20px; opacity: 1; }
+	        }
+	    </style>
 	
 	    <script>
 	    let deferredPrompt;
 	    const installBanner = document.getElementById('installBanner');
 	    const installBtn = document.getElementById('installBtn');
+	    const ebuToast = document.getElementById('ebuToast');
 	
+	    // Register Service Worker (Required for PWA)
 	    if ('serviceWorker' in navigator) {
-	        navigator.serviceWorker.register('/sw.js')
-	        .then(() => console.log("SW Registered"))
-	        .catch(err => console.log("SW Fail", err));
+	        navigator.serviceWorker.register('/sw.js');
 	    }
 	
+	    // Catch the browser's install prompt
 	    window.addEventListener('beforeinstallprompt', (e) => {
-	        console.log('beforeinstallprompt fired'); // Check this in Inspect > Console
 	        e.preventDefault();
 	        deferredPrompt = e;
-	        installBanner.style.display = 'block';
+	        // Show banner after a 3-second delay for better UX
+	        setTimeout(() => {
+	            installBanner.style.display = 'block';
+	        }, 3000);
 	    });
 	
+	    // Handle "Save Now"
 	    installBtn.addEventListener('click', async () => {
 	        if (deferredPrompt) {
 	            deferredPrompt.prompt();
 	            const { outcome } = await deferredPrompt.userChoice;
+	            
+	            if (outcome === 'accepted') {
+	                installBanner.style.display = 'none';
+	                showEbuToast();
+	            }
 	            deferredPrompt = null;
-	            installBanner.style.display = 'none';
 	        }
 	    });
 	
+	    // Handle "Later"
 	    document.getElementById('closeBanner').addEventListener('click', () => {
 	        installBanner.style.display = 'none';
 	    });
+	
+	    // Function to show the success message
+	    function showEbuToast() {
+	        ebuToast.style.display = 'block';
+	        setTimeout(() => {
+	            ebuToast.style.opacity = '0';
+	            ebuToast.style.transition = 'opacity 1s ease';
+	            setTimeout(() => { ebuToast.style.display = 'none'; ebuToast.style.opacity = '1'; }, 1000);
+	        }, 4000);
+	    }
 	    </script>
 	</body>
 </body>
