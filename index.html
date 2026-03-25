@@ -416,44 +416,43 @@
 			       class="sticky-action sticky-wa">
 			        <i class="fa-brands fa-whatsapp"></i> WhatsApp
 			</a>
-</div>
-    </div>
-	<div id="installBanner" style="display:none; position:fixed; bottom:20px; left:50%; transform:translateX(-50%); width:90%; background:#ffffff; border:2px solid #ed1c24; border-radius:12px; padding:15px; box-shadow:0 4px 15px rgba(0,0,0,0.2); z-index:9999; text-align:center;">
-    <p style="margin:0 0 10px 0; font-weight:bold; color:#003366;">Install EbuCare for 24/7 Faster Access</p>
-    <button id="installBtn" style="background:#ed1c24; color:white; border:none; padding:10px 20px; border-radius:6px; font-weight:bold; cursor:pointer;">INSTALL NOW</button>
-    <button id="closeBanner" style="background:none; border:none; color:#666; margin-left:10px; font-size:12px; cursor:pointer;">Not now</button>
-</div>
-	<script>
-	let deferredPrompt;
-	const installBanner = document.getElementById('installBanner');
-	const installBtn = document.getElementById('installBtn');
-	
-	// 1. Register the Service Worker
-	if ('serviceWorker' in navigator) {
-	    navigator.serviceWorker.register('/sw.js');
-	}
-	
-	// 2. Catch the "Install" trigger
-	window.addEventListener('beforeinstallprompt', (e) => {
-	    e.preventDefault(); // Stop the default browser bar
-	    deferredPrompt = e;
-	    installBanner.style.display = 'block'; // Show our custom EbuCare banner
-	});
-	
-	// 3. Handle the "Install Now" click
-	installBtn.addEventListener('click', async () => {
-	    if (deferredPrompt) {
-	        deferredPrompt.prompt();
-	        const { outcome } = await deferredPrompt.userChoice;
-	        deferredPrompt = null;
-	        installBanner.style.display = 'none';
-	    }
-	});
-	
-	// 4. Close banner
-	document.getElementById('closeBanner').addEventListener('click', () => {
-	    installBanner.style.display = 'none';
-	});
-	</script>
+		<div id="installBanner" style="display:none; position:fixed; bottom:20px; left:50%; transform:translateX(-50%); width:90%; background:#ffffff; border:2px solid #ed1c24; border-radius:12px; padding:15px; box-shadow:0 4px 15px rgba(0,0,0,0.2); z-index:9999; text-align:center;">
+		    <p style="margin:0 0 10px 0; font-weight:bold; color:#003366;">Install EbuCare for 24/7 Faster Access</p>
+		    <button id="installBtn" style="background:#ed1c24; color:white; border:none; padding:10px 20px; border-radius:6px; font-weight:bold; cursor:pointer;">INSTALL NOW</button>
+		    <button id="closeBanner" style="background:none; border:none; color:#666; margin-left:10px; font-size:12px; cursor:pointer;">Not now</button>
+		</div>
+		
+		<script>
+		let deferredPrompt;
+		const installBanner = document.getElementById('installBanner');
+		const installBtn = document.getElementById('installBtn');
+		
+		// 1. Register the Service Worker
+		if ('serviceWorker' in navigator) {
+		    navigator.serviceWorker.register('/sw.js');
+		}
+		
+		// 2. Catch the "Install" trigger
+		window.addEventListener('beforeinstallprompt', (e) => {
+		    e.preventDefault(); // Stop the default browser bar
+		    deferredPrompt = e;
+		    installBanner.style.display = 'block'; // Show our custom EbuCare banner
+		});
+		
+		// 3. Handle the "Install Now" click
+		installBtn.addEventListener('click', async () => {
+		    if (deferredPrompt) {
+		        deferredPrompt.prompt();
+		        const { outcome } = await deferredPrompt.userChoice;
+		        deferredPrompt = null;
+		        installBanner.style.display = 'none';
+		    }
+		});
+		
+		// 4. Close banner
+		document.getElementById('closeBanner').addEventListener('click', () => {
+		    installBanner.style.display = 'none';
+		});
+		</script>
 </body>
 </html>
