@@ -171,22 +171,57 @@
         }
 
         .service-card:hover .card-btn { background: var(--secondary-blue); color: var(--text-light); }
-
-        /* --- 4. Trust Badges Section (Grid Alignment) --- */
-        .trust-section { text-align: center; padding: 60px 20px; max-width: 1100px; margin: 0 auto; }
-        .trust-section h3 { font-size: 26px; margin-bottom: 40px; color: var(--primary-blue); }
-        
-        .trust-badges { 
-            display: grid; 
-            grid-template-columns: repeat(4, 1fr); /* 4 columns on desktop */
-            gap: 20px; 
-        }
-        
-        .badge { 
-            display: flex; flex-direction: column; align-items: center; gap: 12px; 
-            font-size: 16px; font-weight: 600; color: #444; 
-        }
-        .badge i { font-size: 32px; color: var(--primary-blue); }
+		
+		/* --- High-Trust Trust Badges (Instrument Cluster UI) --- */
+		.trust-badges { 
+		    display: grid; 
+		    grid-template-columns: repeat(4, 1fr); 
+		    gap: 20px; 
+		}
+		
+		.badge { 
+		    display: flex; 
+		    flex-direction: column; 
+		    align-items: center; 
+		    gap: 15px; 
+		    font-size: 15px; 
+		    font-weight: 700; 
+		    color: #444; 
+		}
+		
+		.badge i { 
+		    position: relative;
+		    font-size: 28px; 
+		    color: var(--primary-blue); 
+		    background: #ffffff; /* Clean white base */
+		    width: 65px;
+		    height: 65px;
+		    display: flex;
+		    align-items: center;
+		    justify-content: center;
+		    border-radius: 50%;
+		    box-shadow: 0 4px 12px rgba(0,0,0,0.06); /* Soft lift from the page */
+		}
+		
+		/* 1. The Red Outer Semi-Circle (30 to 55 min sweep) */
+		.badge i::after {
+		    content: "";
+		    position: absolute;
+		    top: -4px;
+		    left: -4px;
+		    right: -4px;
+		    bottom: -4px;
+		    border-radius: 50%;
+		    border: 2px solid transparent;
+		    border-bottom: 2px solid var(--accent-red); /* Brand Red Color */
+		    border-left: 2px solid var(--accent-red);
+		    /* Rotates the arc to sit between the 6 and 11 o'clock positions */
+		    transform: rotate(-25deg); 
+		}
+		
+		.badge span {
+		    line-height: 1.3;
+		}
 
         /* --- Bottom CTA Section --- */
         .bottom-cta { background-color: var(--primary-blue); color: var(--text-light); text-align: center; padding: 50px 20px; }
