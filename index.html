@@ -248,81 +248,66 @@
 
         @media (max-width: 768px) {
             body { padding-bottom: 55px; }
-            
-            /* 1. Clean Header: Center logo, hide the redundant top button */
             .top-nav { padding: 12px 15px; justify-content: center; }
             .brand-logo { max-height: 42px; }
-            .nav-call-btn { display: none; } /* This makes the squished button disappear on mobile */
-            
+            .nav-call-btn { display: none; }
             .hero h1 { font-size: 26px; }
             .hero h2 { font-size: 16px; margin-bottom: 25px; }
-            
             .how-it-works { flex-direction: column; gap: 8px; }
             .step-pill { width: 90%; justify-content: center; padding: 12px 20px; }
             .step-arrow { transform: rotate(90deg); margin: 2px 0; }
-
             .services-container { margin-top: -15px; }
-            
-            /* 2. Fix the Body Buttons: Prevent text from breaking into two lines */
-            .btn-large { 
-                width: 100%; 
-                font-size: 15px; 
-                padding: 12px 10px;
-                white-space: nowrap; 
-            }
-            
+            .btn-large { width: 100%; font-size: 15px; padding: 12px 10px; white-space: nowrap; }
             .floating-wa { display: none; }
-
-            /* 3. Keep the Sticky Footer as the primary action */
             .mobile-sticky-footer {
                 display: flex; position: fixed; bottom: 0; left: 0; width: 100%;
                 z-index: 9999; box-shadow: 0 -4px 15px rgba(0,0,0,0.15);
             }
-
             .sticky-action {
                 flex: 1; display: flex; justify-content: center; align-items: center; gap: 8px;
                 padding: 16px 0; color: white; font-size: 16px; font-weight: 700; text-transform: uppercase;
             }
-
             .sticky-call { background-color: var(--accent-red); } 
             .sticky-wa { background-color: var(--success-green); }
-            
             .badge { font-size: 14px; text-align: center; }
+        } /* <--- This brace closes the Mobile section correctly */
+
+        /* --- Global Styles (Work on both Laptop & Mobile) --- */
+        .down-arrow {
+            display: inline-block;
+            animation: bounce 1.5s infinite;
         }
-		  .down-arrow {
-		    display: inline-block;
-		    animation: bounce 1.5s infinite;
-		  }
-		
-		  @keyframes bounce {
-		    0%, 100% { transform: translateY(0); }
-		    50% { transform: translateY(4px); }
-		  }
-		  .highlight-yellow {
-		    color: #FFC107; /* modern yellow */
-		  }  
-		  .seo-intro {
-			    text-align: center;
-			    padding: 30px 20px 10px; /* Gives room for the H1 to breathe */
-			    background-color: #ffffff;
-			}
-			
-			.seo-intro h1 {
-			    color: var(--primary-blue); /* #004494 */
-			    font-size: 1.6rem;
-			    font-weight: 800;
-			    margin-bottom: 8px;
-			    line-height: 1.2;
-			}
-			
-			.seo-intro p {
-			    color: #555555; /* Softer dark gray for readability */
-			    font-size: 0.95rem;
-			    max-width: 600px;
-			    margin: 0 auto;
-			    line-height: 1.5;
-			}
-}
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(4px); }
+        }
+
+        .highlight-yellow {
+            color: #FFC107; 
+        }
+
+        .seo-intro {
+            text-align: center;
+            padding: 30px 20px 10px;
+            background-color: #ffffff;
+        }
+
+        .seo-intro h1 {
+            color: var(--primary-blue);
+            font-size: 1.6rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+            line-height: 1.2;
+        }
+
+        .seo-intro p {
+            color: #555555;
+            font-size: 0.95rem;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
     </style>
 </head>
 <body>
