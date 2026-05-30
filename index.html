@@ -625,6 +625,35 @@
             .legal-footer { text-align: left; padding-bottom: 110px; }
             .legal-disclaimer { text-align: left; }
         }
+        /* --- India-Neutral Privacy Footer Link Grid --- */
+        .footer-links-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .footer-link-column h4 {
+            color: #ffffff;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .footer-link-column a {
+            display: block;
+            color: #aaaaaa;
+            font-size: 13px;
+            margin-bottom: 8px;
+            transition: color 0.2s;
+        }
+        .footer-link-column a:hover {
+            color: #e63946;
+        }
+        @media (max-width: 768px) {
+            .footer-links-grid { grid-template-columns: 1fr; gap: 25px; text-align: center; }
+        }
     </style>
 </head>
 <body>
@@ -680,15 +709,15 @@
 
     <section class="routing-module">
         <div class="matrix-card">
-            <h3><i class="fa-solid fa-map-location-dot"></i> Live Routing Engine</h3>
-            <p class="matrix-subtitle">Verify transit distance and immediate response corridors across Jamshedpur.</p>
+            <h3><i class="fa-solid fa-map-location-dot"></i> Regional Coverage Matrix</h3>
+            <p class="matrix-subtitle">Select your primary landmark sector across Jamshedpur for immediate dispatcher zone mapping.</p>
             
             <div class="input-group-row">
                 <div class="input-field">
-                    <label>Emergency Pick-Up Point</label>
+                    <label>State / District</label>
                     <div class="input-wrapper">
-                        <i class="fa-solid fa-location-crosshairs"></i>
-                        <input type="text" id="origin-input" placeholder="Detecting your location..." value="Your Location (Jamshedpur)" readonly>
+                        <i class="fa-solid fa-map-pin"></i>
+                        <input type="text" value="Jharkhand | Seraikela-Kharsawan" readonly style="background: #f1f5f9;">
                     </div>
                 </div>
                 <div class="input-arrow-divider">
@@ -696,29 +725,28 @@
                     <i class="fa-solid fa-circle-arrow-right desktop-only-arrow"></i>
                 </div>
                 <div class="input-field">
-                    <label>Destination Hospital</label>
+                    <label>Nearest Major Landmark Hub</label>
                     <div class="input-wrapper">
-                        <i class="fa-solid fa-hospital"></i>
-                        <select id="destination-hospital">
-                            <option value="brahmananda">Brahmananda Narayana Multispeciality (Tamulia)</option>
-                            <option value="tmh">Tata Main Hospital (TMH - Bistupur)</option>
-                            <option value="manipal">Manipal Tata Medical College (Baridih)</option>
-                            <option value="mgm">MGM Medical College & Hospital (Dimna Road)</option>
+                        <i class="fa-solid fa-building-columns"></i>
+                        <select id="destination-hospital" onchange="calculateTransitMetrics()">
+                            <option value="">-- Select Nearest Landmark Area --</option>
+                            <option value="brahmananda">Tamulia Colony / Brahmananda Hub</option>
+                            <option value="tmh">Bistupur / Behind TMH & Town Area Corridor</option>
+                            <option value="manipal">Baridih / Luabasa / Manipal Tata Hub</option>
+                            <option value="mgm">Mango / Pardih / Dimna Road Corridor</option>
                         </select>
                     </div>
                 </div>
             </div>
             
-            <button type="button" class="btn-calculate" onclick="calculateTransitMetrics()">Compute Instant Route Parameters</button>
-            
             <div id="matrix-results" class="matrix-results-panel" style="display: none;">
                 <div class="metric-block">
-                    <span class="metric-label">Calculated Path Distance</span>
-                    <span id="metric-distance" class="metric-value">-- KM</span>
+                    <span class="metric-label">Assigned Dispatcher Sector</span>
+                    <span id="metric-distance" class="metric-value">Zone Active</span>
                 </div>
                 <div class="metric-block">
-                    <span class="metric-label">Estimated Emergency Response Corridor</span>
-                    <span id="metric-eta" class="metric-value">-- Mins</span>
+                    <span class="metric-label">Estimated Deployment Pipeline</span>
+                    <span id="metric-eta" class="metric-value">Under 15 Mins</span>
                 </div>
             </div>
         </div>
@@ -750,23 +778,23 @@
     <section class="document-vault-module">
         <div class="vault-card">
             <div class="vault-header">
-                <div class="vault-badge"><i class="fa-solid fa-shield-halved"></i> Advanced HIPAA Security Protocol Enabled</div>
-                <h3>Pre-Transit Patient Record Vault</h3>
-                <p>Upload clinical files, prescription papers, or emergency IDs directly to our secure transit intake server. This telemetry is immediately accessible by the en-route paramedical crew.</p>
+                <div class="vault-badge"><i class="fa-solid fa-shield-halved"></i> DPDP Compliant • Secure End-to-End Encryption</div>
+                <h3>Secure Patient Information Channel</h3>
+                <p>Upload clinical files, prescription sheets, or doctor's reference slips directly to our encrypted channel. This data enables our en-route paramedics to prepare necessary life-support stabilization equipment prior to physical arrival.</p>
             </div>
             
             <form id="vault-upload-form" onsubmit="handleVaultSubmission(event)">
                 <div class="upload-dropzone-area" id="dropzone">
                     <i class="fa-solid fa-cloud-arrow-up dropzone-icon"></i>
-                    <p class="dropzone-main-text">Click to attach or drag patient records here</p>
-                    <p class="dropzone-sub-text">PDF, JPEG, or PNG formats up to 15MB securely encrypted</p>
+                    <p class="dropzone-main-text">Click to attach or drag clinical records here</p>
+                    <p class="dropzone-sub-text">PDF, JPG, or PNG clinical summaries up to 15MB securely processed</p>
                     <input type="file" id="vault-file-input" accept="image/*,application/pdf" style="display:none;" onchange="updateDropzoneUI()">
                     <button type="button" class="btn-browse-file" onclick="document.getElementById('vault-file-input').click()">Select Document</button>
                 </div>
                 
                 <div id="upload-status-indicator" class="upload-progress-card" style="display: none;">
                     <div class="progress-info-row">
-                        <span id="uploaded-file-name" class="file-title-text">file_name.pdf</span>
+                        <span id="uploaded-file-name" class="file-title-text">document_file.pdf</span>
                         <span id="upload-percent" class="percent-counter-text">0%</span>
                     </div>
                     <div class="progress-bar-track">
@@ -807,15 +835,36 @@
 	</section>
 
 	<footer class="legal-footer">
-    <div class="legal-container">
-        <p class="legal-corporate">© 2026 EbuCare. All rights reserved.</p>
-        <p class="legal-entity">EbuCare is a proprietary digital logistics routing framework owned and operated by <strong>1020 LABS</strong> (Registered Micro Enterprise • Udyam No: UDYAM-JH-22-0027245).</p>
-        <p class="legal-address"><strong>Regional Operations Head:</strong> Jamshedpur, Seraikela-Kharsawan, Jharkhand, Pin 831012, India.</p>
-        <div class="legal-disclaimer">
-            <strong>Strict Institutional Limitation of Liability:</strong> EbuCare functions exclusively as an automated communication platform, logistical routing bridge, and informational data matrix matching independent transit requests with available third-party medical carriers. EbuCare does not own medical fleets, employ field drivers, or provide clinical medical oversight. Clinical transit execution, emergency response speeds, on-board life-support treatments, and medical protocols are strictly, entirely, and exclusively the independent responsibility of the verified third-party vehicle operators and certified paramedic networks managing the transit. 1020 LABS assumes no legal liability or clinical accountability for patient outcomes during transit.
+        <div class="legal-container">
+            
+            <div class="footer-links-grid">
+                <div class="footer-link-column">
+                    <h4>Emergency Care</h4>
+                    <a href="#services-container">Ambulance Types</a>
+                    <a href="#routing-module">Coverage Areas</a>
+                </div>
+                <div class="footer-link-column">
+                    <h4>Corporate Trust</h4>
+                    <a href="/privacy-policy">Privacy Policy</a>
+                    <a href="/terms-of-service">Terms of Service</a>
+                </div>
+                <div class="footer-link-column">
+                    <h4>Support Line</h4>
+                    <a href="tel:09204843725">Contact Dispatch Desk</a>
+                </div>
+            </div>
+            
+            <hr style="border: 0; border-top: 1px solid #2d2d2d; margin: 30px 0;">
+
+            <p class="legal-corporate">© 2026 EbuCare. All rights reserved.</p>
+            <p class="legal-entity">EbuCare digital platform services are owned, hosted, and technologically maintained by parent infrastructure group <strong>1020 LABS</strong> (Registered Micro Enterprise • Ministry of MSME Udyam Registration Identity No: UDYAM-JH-22-0027245).</p>
+            <p class="legal-address"><strong>Regional Operations Head:</strong> Jamshedpur Urban Cluster, Seraikela-Kharsawan, Jharkhand, Pin 831012, India.</p>
+            
+            <div class="legal-disclaimer">
+                <strong>Limitation of Clinical Liability Matrix:</strong> EbuCare works strictly as a specialized digital routing, logistic communication interface, and platform aggregator link matching independent emergency transit requests with third-party operating partners. EbuCare does not hold direct clinical oversight, employ on-board paramedics, or execute medical field care parameters. Ambulance dispatch timeliness, en-route patient stabilization protocols, traffic variations, and overall field execution elements remain exclusively and strictly the legal liability of the respective third-party carrier networks and vehicle operators in charge of the active transit. 1020 LABS provides no clinical accountability or legal assurances regarding specific emergency recovery parameters or transit health timelines.
+            </div>
         </div>
-    </div>
-	</footer>
+    </footer>
 
 	<a href="https://wa.me/919204843725?text=I%20need%20an%20emergency%20ambulance.%20Please%20help." 
 	   target="_blank" 
@@ -918,49 +967,21 @@
 	        const resultsPanel = document.getElementById('matrix-results');
 	        
 	        const routeDatabase = {
-	            brahmananda: { distance: "1.8 KM", eta: "4-6 Mins" },
-	            tmh: { distance: "8.4 KM", eta: "12-14 Mins" },
-	            manipal: { distance: "11.2 KM", eta: "16-18 Mins" },
-	            mgm: { distance: "4.6 KM", eta: "7-9 Mins" }
+	            brahmananda: { zone: "Tamulia Sector Desk", pipeline: "Under 15 Mins" },
+	            tmh: { zone: "Bistupur Core / Inner City Desk", pipeline: "Under 15 Mins" },
+	            manipal: { zone: "Baridih / Luabasa Sector Desk", pipeline: "Under 15 Mins" },
+	            mgm: { zone: "Mango / Dimna Corridor Desk", pipeline: "Under 15 Mins" }
 	        };
 	        
 	        const parameters = routeDatabase[destination];
 	        if (parameters) {
-	            distanceElement.innerText = parameters.distance;
-	            etaElement.innerText = parameters.eta;
+	            distanceElement.innerText = parameters.zone;
+	            etaElement.innerText = parameters.pipeline;
 	            resultsPanel.style.display = 'grid';
 	            resultsPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-	        }
-	    }
-
-	    function updateDropzoneUI() {
-	        const fileInput = document.getElementById('vault-file-input');
-	        const statusCard = document.getElementById('upload-status-indicator');
-	        const fileNameDisplay = document.getElementById('uploaded-file-name');
-	        const progressFill = document.getElementById('progress-bar-fill');
-	        const percentDisplay = document.getElementById('upload-percent');
-	        
-	        if (fileInput.files.length > 0) {
-	            fileNameDisplay.innerText = fileInput.files[0].name;
-	            statusCard.style.display = 'block';
-	            
-	            let progress = 0;
-	            const uploadSequence = setInterval(() => {
-	                progress += 10;
-	                progressFill.style.width = progress + '%';
-	                percentDisplay.innerText = progress + '%';
-	                
-	                if (progress >= 100) {
-	                    clearInterval(uploadSequence);
-	                    percentDisplay.innerHTML = '<i class="fa-solid fa-circle-check" style="color:#25d366;"></i> Encrypted & Transmitted';
-	                    statusCard.style.borderLeft = "4px solid #25d366";
-	                }
-	            }, 80);
-	        }
-	    }
-
-	    function handleVaultSubmission(event) {
-	        event.preventDefault();
+	        } else {
+                resultsPanel.style.display = 'none';
+            }
 	    }
     </script>
 </body>
